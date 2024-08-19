@@ -22,50 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // adiociona o evento de keydown
-  document.addEventListener("keydown", (event) => {
-    handleKeyboardInput();
-  });
-
-  function handleKeyboardInput(key) {
-    if (!isNaN(key) || key === "." || key === ",") {
-      handleNumber(key === "." ? "," : key);
-    } else {
-      switch (key) {
-        case "Enter":
-          handleOperation("=");
-          break;
-        case "Backspace":
-          handleBackspace();
-          break;
-        case "Escape":
-          handleOperation("AC");
-          break;
-        case "+":
-        case "-":
-        case "*":
-        case "/":
-          handleOperation(mapOperation(key));
-          break;
-      }
-      updateDisplay();
-    }
-  }
-
-  function mapOperation(key) {
-    switch (key) {
-      case "*":
-        return "X";
-      case "/":
-        return "÷";
-      default:
-        return key;
-    }
-  }
-
-  function handleBackspace() {
-    currentInput = currentInput.slice(0, -1);
-  }
 
   function handleNumber(value) {
     if (value === "," && currentInput.includes(",")) return; // evita múltiplas vírgulas
