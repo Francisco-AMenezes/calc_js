@@ -10,8 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", () => {
       const value = button.textContent;
 
-      // verifica se é número ou vírgula
-
       if (!isNaN(value) || value === ",") {
         handleNumber(value);
       } else {
@@ -22,10 +20,56 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Adicionando o evento para o teclado
+  document.addEventListener("keydown", (event) => {
+    handleKeyboardInput(event.key);
+  });
+
+  function handleKeyboardInput(key) {
+    // Converte a tecla pressionada em uma operação ou número correspondente
+    if (!isNaN(key) || key === "." || key === ",") {
+      handleNumber(key === "." ? "," : key); // Troca o ponto por vírgula
+    } else {
+      switch (key) {
+        case "Enter":
+          handleOperation("=");
+          break;
+        case "Backspace":
+          handleBackspace();
+          break;
+        case "c":
+          handleOperation("AC");
+          break;
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+          handleOperation(mapOperation(key));
+          break;
+      }
+    }
+    updateDisplay();
+  }
+
+  function mapOperation(key) {
+    // Mapeia as teclas para as operações correspondentes no layout
+    switch (key) {
+      case "*":
+        return "X";
+      case "/":
+        return "÷";
+      default:
+        return key;
+    }
+  }
+
+  function handleBackspace() {
+    currentInput = currentInput.slice(0, -1);
+  }
 
   function handleNumber(value) {
-    if (value === "," && currentInput.includes(",")) return; // evita múltiplas vírgulas
-    currentInput += value === "," ? "." : value; // converte a vírgula em ponto decimal
+    if (value === "," && currentInput.includes(",")) return; // Evita múltiplas vírgulas
+    currentInput += value === "," ? "." : value; // Converte a vírgula para ponto
   }
 
   function handleOperation(value) {
@@ -106,6 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateDisplay() {
-    display.value = currentInput.replace(".", ","); // exibe a vírgula no lugar do ponto
+    display.value = currentInput.replace(".", ","); // Exibe a vírgula no lugar do ponto
   }
 });
