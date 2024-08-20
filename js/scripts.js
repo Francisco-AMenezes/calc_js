@@ -2,10 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const display = document.querySelector(".display");
   const buttons = document.querySelectorAll(".buttons button");
 
-  let currentInput = ""; // armazena o valor atual no display
-  let previousInput = ""; // armazena o valor do display antes da operação
-  let operation = null; // armazena a operação atual (+, -, *, /)
+  let currentInput = ""; // keeps actual value on display
+  let previousInput = ""; // keeps displays value before the operation
+  let operation = null; // keeps the current operation (+, -, *, /)
 
+  // add the click event for each button
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const value = button.textContent;
@@ -20,15 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Adicionando o evento para o teclado
+  // add the keyboard event
   document.addEventListener("keydown", (event) => {
     handleKeyboardInput(event.key);
   });
 
   function handleKeyboardInput(key) {
-    // Converte a tecla pressionada em uma operação ou número correspondente
+    // converts the pressed key to a corresponding operation or number
     if (!isNaN(key) || key === "." || key === ",") {
-      handleNumber(key === "." ? "," : key); // Troca o ponto por vírgula
+      handleNumber(key === "." ? "," : key); // change the dot for a comma
     } else {
       switch (key) {
         case "Enter":
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function mapOperation(key) {
-    // Mapeia as teclas para as operações correspondentes no layout
+    // Map the keys for corresponding operation on the layout
     switch (key) {
       case "*":
         return "X";
@@ -68,8 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function handleNumber(value) {
-    if (value === "," && currentInput.includes(",")) return; // Evita múltiplas vírgulas
-    currentInput += value === "," ? "." : value; // Converte a vírgula para ponto
+    if (value === "," && currentInput.includes(",")) return; // avoids multiple commas
+    currentInput += value === "," ? "." : value; // change the dot for a comma
   }
 
   function handleOperation(value) {
@@ -150,6 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateDisplay() {
-    display.value = currentInput.replace(".", ","); // Exibe a vírgula no lugar do ponto
+    display.value = currentInput.replace(".", ","); // shows the comma instead the dot
   }
 });

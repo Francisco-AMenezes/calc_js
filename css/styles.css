@@ -10,7 +10,7 @@ body {
 .calculator {
   background-color: rgb(28, 28, 30);
   border-radius: 10px;
-  height: 315px;
+  height: 328px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   width: 230px;
   overflow: hidden;
@@ -55,17 +55,17 @@ body {
   grid-column: span 2;
 }
 
-.zerar,
-.maisMenos,
-.porcentagem {
+.reset,
+.toggleSign,
+.percentage {
   background-color: #666667;
 }
 
-.divisao,
-.multiplicar,
-.adicao,
-.subtracao,
-.igual {
+.division,
+.multiply,
+.addition,
+.subtraction,
+.equal {
   background-color: #ff9f03;
 }
 
